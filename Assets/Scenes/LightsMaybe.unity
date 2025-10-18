@@ -1242,12 +1242,28 @@ PrefabInstance:
       value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
+      propertyPath: m_Color.b
+      value: 0.47358483
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
+      propertyPath: m_Color.g
+      value: 0.76890016
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_Intensity
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_SpotAngle
-      value: 60.503593
+      value: 70.00802
       objectReference: {fileID: 0}
     - target: {fileID: 1092498261661679772, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_InnerSpotAngle
