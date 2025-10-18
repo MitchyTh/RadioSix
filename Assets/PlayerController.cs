@@ -1,9 +1,11 @@
-using System;
 using System.Collections;
 using UnityEngine;
+//using Unity.Netcode;
 using UnityEngine.InputSystem;
+using Unity.Cinemachine;
+using Unity.VisualScripting;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour //Network Behavior for multi
 {
     [SerializeField] public float speed = 5f;
     [SerializeField] private float jumpDelay = 0.5f;
@@ -13,6 +15,10 @@ public class PlayerController : MonoBehaviour
 
     public new Transform camera;
 
+    public Camera MainCamera;
+    public CinemachineBrain brain;
+    public CinemachineCamera cinemachineCamera;
+        
     private CharacterController _controller;
     private CapsuleCollider _collider;
     private Vector2 _moveInput;
@@ -36,10 +42,10 @@ public class PlayerController : MonoBehaviour
     {
         _collider = GetComponent<CapsuleCollider>();
         _controller = GetComponent<CharacterController>();
-        
-        castHeight = (_collider.height / 2 * transform.localScale.y)-_collider.height*0.25f;
+
+        castHeight = (_collider.height / 2 * transform.localScale.y) - _collider.height * 0.25f;
         radius = _collider.radius;
-        
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -50,35 +56,38 @@ public class PlayerController : MonoBehaviour
         bool isGrounded = Physics.Raycast(transform.position - new Vector3(radius, castHeight),
             Vector3.down, 0.6f, LayerMask.GetMask("ground"));
         Debug.DrawRay(transform.position - new Vector3(radius, castHeight),
-            Vector3.down *0.6f, Color.green );
+            Vector3.down * 0.6f, Color.green);
         if (isGrounded)
             return isGrounded;
-        
+
         isGrounded = Physics.Raycast(transform.position - new Vector3(-radius, castHeight),
             Vector3.down, 0.6f, LayerMask.GetMask("ground"));
         Debug.DrawRay(transform.position - new Vector3(-radius, castHeight),
-            Vector3.down *0.6f, Color.green );
+            Vector3.down * 0.6f, Color.green);
         if (isGrounded)
             return isGrounded;
-        
+
         isGrounded = Physics.Raycast(transform.position - new Vector3(0, castHeight, radius),
             Vector3.down, 0.6f, LayerMask.GetMask("ground"));
         Debug.DrawRay(transform.position - new Vector3(0, castHeight, radius),
-            Vector3.down *0.6f, Color.green );
+            Vector3.down * 0.6f, Color.green);
         if (isGrounded)
             return isGrounded;
-        
+
         isGrounded = Physics.Raycast(transform.position - new Vector3(0, castHeight, -radius),
             Vector3.down, 0.6f, LayerMask.GetMask("ground"));
         Debug.DrawRay(transform.position - new Vector3(0, castHeight, -radius),
-            Vector3.down *0.6f, Color.green );
-        
+            Vector3.down * 0.6f, Color.green);
+
         return isGrounded;
     }
 
     private void Update() //this function runs once every frame
     {
-        print(_externalMomentum);
+       //if(!checkOwner.checkForOwner()) return;
+        
+
+        //print(_externalMomentum);
         _grounded = isGrounded(); //checks if the player is grounded
         if (_grounded && coyoteJump) //checks if need to do coyote jump
         {
@@ -87,7 +96,7 @@ public class PlayerController : MonoBehaviour
         if (!_grounded)
             _velocity.y += gravity * Time.deltaTime; //calculates gravity
         _controller.Move(_velocity * Time.deltaTime); //applies gravity
-        
+
 
         Vector3 forward = camera.forward; //code for keeping the same direction forward when you turn
         Vector3 right = camera.right;
@@ -96,12 +105,12 @@ public class PlayerController : MonoBehaviour
         right.y = 0f;
         forward.Normalize();
         right.Normalize();
-        
+
         Vector3 moveDirection = forward * _moveInput.y + right * _moveInput.x;
-        
+
         float accel = _grounded ? groundAcceleration : airAcceleration;
         float decel = _grounded ? groundDeceleration : airDeceleration;
-        
+
         if (moveDirection.magnitude > 0f)
         {
             // Accelerate toward target velocity
@@ -119,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
         // --- Move controller ---
         _controller.Move(finalVelocity * Time.deltaTime);
-        
+
         //_controller.Move(moveDirection * speed * Time.deltaTime);
 
         // Rotate player to face same direction as camera 
@@ -129,21 +138,26 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context) //detects input for movement
     {
+       // if (!checkOwner.checkForOwner()) return;
+        print("moving");
         _moveInput = context.ReadValue<Vector2>();
     }
 
     public void Jump(InputAction.CallbackContext context) //detects input for jump
     {
-        
-        if (_grounded && context.performed)
-        {
-            _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); //applies jump force
-            coyoteJump = false;
-        }
-        else if (context.performed)
-        {
-            StartCoroutine(CoyoteJumpTimer());
-        }
+        //if (checkOwner.checkForOwner())
+        //{
+
+            if (_grounded && context.performed)
+            {
+                _velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); //applies jump force
+                coyoteJump = false;
+            }
+            else if (context.performed)
+            {
+                StartCoroutine(CoyoteJumpTimer());
+            }
+        //}
     }
 
     private IEnumerator CoyoteJumpTimer()
@@ -151,6 +165,9 @@ public class PlayerController : MonoBehaviour
         coyoteJump = true;
         yield return new WaitForSeconds(jumpDelay);
         coyoteJump = false;
-        
+
     }
-} 
+
+}
+
+
