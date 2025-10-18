@@ -111,9 +111,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.38
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.14, z: 0}
 --- !u!143 &7062996040408863338
 CharacterController:
   m_ObjectHideFlags: 0
@@ -200,6 +200,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f6fb40fa-ca57-4db1-a552-8c99aa3f01ef
     m_ActionName: 'Gameplay/Look[/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ddf337b3-3680-4335-b013-21384d755060
+    m_ActionName: 'Gameplay/Interact[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3671ccd3-3c40-4bcb-9740-4cd5c6408d91
+    m_ActionName: 'Gameplay/Flashlight[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -227,7 +235,6 @@ MonoBehaviour:
   airAcceleration: 12
   camera: {fileID: 7913645852613285870}
   MainCamera: {fileID: 8824746836366980726}
-  PictureCamera: {fileID: 8824746836366980726}
   brain: {fileID: 8401676907729094323}
   cinemachineCamera: {fileID: 1212028471459282203}
   _grounded: 0
@@ -479,8 +486,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4321211371415900532}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.44512868, y: 0.3380135, z: 0.18620196, w: 0.8080447}
-  m_LocalPosition: {x: 0, y: 1.02, z: 0}
+  m_LocalRotation: {x: 0.086188614, y: 0.14799397, z: -0.012947795, w: 0.98514044}
+  m_LocalPosition: {x: 35.346115, y: 1.5871972, z: 10.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
