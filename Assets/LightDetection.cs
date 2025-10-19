@@ -83,41 +83,4 @@ public class LightDetection : MonoBehaviour
         float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
         return exposureIntensity;
     }
-
-
-    //float GetLightIntensity(Light light)
-    //{
-    //    RaycastHit hit;
-    //    Vector3 lightPosition = light.transform.position;
-    //    Vector3 lightDirection = light.transform.forward;
-    //    Vector3 toOther = Vector3.Normalize(transform.position - light.transform.position);
-
-    //    float exposureIntensity;
-    //    if(Vector3.Dot(lightDirection, toOther) < 0)
-    //    {
-    //        Debug.Log($"{light.gameObject.name}: Behind light");
-    //    } else
-    //    {
-    //        Debug.Log($"{light.gameObject.name}: In Light");
-    //    }
-
-
-
-
-    //    Physics.Raycast(transform.position, lightPosition, out hit, Mathf.Infinity);
-    //    Debug.DrawRay(transform.position, lightPosition * hit.distance, Color.yellow);
-
-        
-    //    Debug.Log($"Light Direction for {light.gameObject.name}: {lightDirection}");
-
-    //    Debug.DrawRay(light.transform.position, lightDirection * 10f, Color.red, 15f);
-
-    //    // Currently grabs the distance, not accounting for the player being in front of the light.  
-    //    exposureIntensity = Mathf.Clamp(light.intensity / Mathf.Pow(hit.distance, 2), 0,1);
-        
-    //    //Debug.Log($"Light Intensity {exposureIntensity}");
-        
-    //    return exposureIntensity;
-    //    //return (Physics.Raycast(transform.position, lightPosition, out hit, Mathf.Infinity));
-    //}
 }
