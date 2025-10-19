@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1777417283433536432}
   - component: {fileID: 2800757112455258919}
   - component: {fileID: 8885747248916033354}
-  - component: {fileID: 2004021827372903742}
   - component: {fileID: 702384793720619133}
   - component: {fileID: 8920094303085281752}
   - component: {fileID: 8743634275284786995}
   - component: {fileID: 2303201033221993348}
+  - component: {fileID: 8923370040593916627}
   m_Layer: 0
   m_Name: Monsterlarge
   m_TagString: Untagged
@@ -92,29 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2004021827372903742
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4929401859558038486}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.53
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &702384793720619133
 AudioSource:
   m_ObjectHideFlags: 0
@@ -237,7 +214,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4929401859558038486}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2.38
+  m_Radius: 1.42
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -263,6 +240,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+--- !u!65 &8923370040593916627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929401859558038486}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.84, y: 2.8, z: 2.42}
+  m_Center: {x: 0, y: 0.43, z: 0}
 --- !u!1001 &1359028376856317058
 PrefabInstance:
   m_ObjectHideFlags: 0
