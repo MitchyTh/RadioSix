@@ -16,7 +16,7 @@ public class StaticScript : MonoBehaviour
     public void setStatic(float lightLevel, float threshhold)
     {
         if (lightLevel > threshhold)
-            damageLevel -= 0.01f;
+            damageLevel -= 0.05f;
         else
         {
             bool col = false;
@@ -29,7 +29,7 @@ public class StaticScript : MonoBehaviour
             if (col)
                 damageLevel += 0.01f;
             else
-                damageLevel -= 0.01f;
+                damageLevel -= 0.05f;
         }
         material.SetFloat("_Alpha", damageLevel);
         if (damageLevel >= 1.0f)
