@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 
 public class KeyBools : MonoBehaviour
 {
-    bool key1 = false, key2 = false, key3 = false, key4 = false, canLeave = false;
+    bool key1 = false, key2 = false, key3 = false, key4 = false;
+    public bool canLeave = false;
 
     public bool flashlightInRange;
      private GameObject keyInRange; // Stores key the player is near
@@ -48,7 +49,6 @@ public class KeyBools : MonoBehaviour
         if (key1 && key2 && key3 && key4)
         {
             canLeave = true;
-            Debug.Log("You Can Leave");
         }
     }
 
