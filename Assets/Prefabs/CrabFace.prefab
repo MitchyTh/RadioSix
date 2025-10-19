@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.134544
+      value: 0.0917321
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.134544
+      value: 0.0917321
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.134544
+      value: 0.0917321
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.43195
+      value: 0.53983
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 24.882555
+      value: 24.888
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4b6db151c09d2094a9ed424cc531e9f4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7421401767622884354}
-  howCloseisTooClose: 20
+  howCloseisTooClose: 25
   fleeDistance: 10
   wanderRadius: 40
   wanderInterval: 7
