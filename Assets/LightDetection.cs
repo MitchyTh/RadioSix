@@ -29,8 +29,8 @@ public class LightDetection : MonoBehaviour
         hasLastKey = false;
         brightThreshold = 0.05f;
         stressLevel = 0;
-        lastBrightTime = Time.time;
         lastDarkTime = Time.time;
+        monster.GetComponent<AgentFollowPlayer>().StopChase();
 
     }
 
