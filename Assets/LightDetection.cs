@@ -7,25 +7,24 @@ using UnityEngine;
 public class LightDetection : MonoBehaviour
 {
     [Range(0f, 1f)] public float LightLevel = 0f;
-    public GameObject staticEffectImage;
     private Vector3 position;
     private float lastBrightTime;
     private float brightThreshold = 0.5f;
-    private float darkThreshold = 0.1f;
     private float chaseTimeout = 5.0f;
     private float max = 15.0f;
-    private StaticScript staticScript;
     public GameObject flashlight;
     public bool hasPassedMonsterStart = false;
     public Light[] lights;
+    public GameObject monster;
+    public float killDistance = 1.7f;
+    public float stressLevel;
 
     private void Start()
     {
         position = transform.position;
         hasPassedMonsterStart = false;
-        staticScript = staticEffectImage.GetComponent<StaticScript>();
         brightThreshold = 0.5f;
-        darkThreshold = 0.1f;
+        stressLevel = 0;
     }
 
     private void Update()
@@ -39,11 +38,14 @@ public class LightDetection : MonoBehaviour
                 //CALL START CHASE
             }
         }
-        else if (LightLevel < darkThreshold && Time.time - lastBrightTime > chaseTimeout)
+        else if (LightLevel < brightThreshold && Time.time - lastBrightTime > chaseTimeout)
         {
             //CALL STOP CHASE
         }
-        staticScript.setStatic(LightLevel, darkThreshold);
+        stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
+        print("Light: " + LightLevel + " Stress: " + stressLevel);
+        if ((monster.transform.position - this.transform.position).magnitude < killDistance)
+            this.GetComponent<KillPlayer>().kill();
     }
     
     private float getPlayerLight()
@@ -71,14 +73,8 @@ public class LightDetection : MonoBehaviour
         RaycastHit hit;
         Vector3 rayDirection = (lightPosition - position).normalized;
         float maxDistance = Vector3.Distance(position, lightPosition);
-        if (Physics.Raycast(position, rayDirection, out hit, maxDistance))
-        {
-            //Debug.DrawRay(position,lightPosition,Color.yellow);
-            // If the ray hits something, check if it's the light source itself.
-            // If it's something else, the player is blocked.
-            if (hit.transform.gameObject != light.gameObject)
-                return 0.0f;
-        }
+        if (Physics.Raycast(position, rayDirection, out hit, maxDistance)&& hit.transform.gameObject != light.gameObject)
+            return 0.0f;
         float distance = Vector3.Distance(position, lightPosition);
         float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
         return exposureIntensity;
