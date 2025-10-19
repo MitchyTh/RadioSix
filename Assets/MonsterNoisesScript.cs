@@ -10,10 +10,16 @@ public class MonsterNoisesScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private AudioSource audioSource;
+    public AudioSource deathAudio;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.volume = 0f;
+    }
+    public void deathNoise()
+    {
+        deathAudio.Play();
     }
 
     // Update is called once per frame
