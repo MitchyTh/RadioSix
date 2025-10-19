@@ -8,16 +8,71 @@ public class AgentFollowPlayer : MonoBehaviour
     public Transform player;  // Drag your player GameObject here
     private NavMeshAgent agent;
 
-    void Start()
+    [Header("Wandering Settings")]
+    public float wanderRadius = 10f;
+    public float wanderInterval = 5f;
+    private float wanderTimer;
+
+    public bool wander;
+
+    private float OGspeed;
+
+    void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        OGspeed = agent.speed;
+        wander = true;
     }
 
     void Update()
     {
+
+        if (!wander)
+            chasePlayer();
+        else
+            WanderAround();
+    }
+    void WanderAround()
+    {
+        wanderTimer += Time.deltaTime;
+        if (wanderTimer >= wanderInterval)
+        {
+            Vector3 newPos = RandomNavSphere(transform.position, wanderRadius, NavMesh.AllAreas);
+            if (newPos != transform.position)
+                agent.SetDestination(newPos);
+            wanderTimer = 0;
+        }
+    }
+
+    public void StartChase()
+    {
+        agent.speed = OGspeed;
+        agent.ResetPath();
+        wander = false;
+    }
+    public void StopChase() 
+    {
+        agent.speed = agent.speed / 3;
+        agent.ResetPath();
+        wander = true;
+    }
+
+    Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * dist;
+        randomDirection.y = 0;
+        randomDirection += origin;
+
+        if (NavMesh.SamplePosition(randomDirection, out NavMeshHit navHit, dist, layermask))
+            return navHit.position;
+
+        return origin;
+    }
+
+    void chasePlayer()
+    {
         if (agent != null && player != null)
         {
-            agent.SetDestination(player.position);
 
             NavMeshHit hit;
             if (NavMesh.SamplePosition(player.position, out hit, 2f, NavMesh.AllAreas))
@@ -28,6 +83,10 @@ public class AgentFollowPlayer : MonoBehaviour
             {
                 Debug.Log("Player not being tracked on navmesh");
             }
+        }
+        else
+        {
+            Debug.Log("player or agen not founnd");
         }
     }
 }
