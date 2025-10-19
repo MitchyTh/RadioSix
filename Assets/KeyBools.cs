@@ -10,6 +10,7 @@ public class KeyBools : MonoBehaviour
     public bool canLeave = false;
 
     public bool flashlightInRange;
+    public LightDetection lightDetection;
      private GameObject keyInRange; // Stores key the player is near
     private AudioSource audioSource;
 
@@ -21,6 +22,7 @@ public class KeyBools : MonoBehaviour
     {
         key1 = true;
         checkCanLeave();
+        checkFirstKey();
         audioSource.Play();
     }
 
@@ -28,6 +30,7 @@ public class KeyBools : MonoBehaviour
     {
         key2 = true;
         checkCanLeave();
+        checkFirstKey();
         audioSource.Play();
     }
 
@@ -35,6 +38,7 @@ public class KeyBools : MonoBehaviour
     {
         key3 = true;
         checkCanLeave();
+        checkFirstKey();
         audioSource.Play();
     }
 
@@ -42,6 +46,7 @@ public class KeyBools : MonoBehaviour
     {
         key4 = true;
         checkCanLeave();
+        checkFirstKey();
         audioSource.Play();
     }
     public void checkCanLeave()
@@ -49,6 +54,17 @@ public class KeyBools : MonoBehaviour
         if (key1 && key2 && key3 && key4)
         {
             canLeave = true;
+            lightDetection.hasLastKey = true;
+        }
+    }
+
+    public void checkFirstKey()
+    {
+        Debug.Log("Check first key");
+        if (lightDetection.hasFirstKey == false)
+        {
+            print("set true");
+            lightDetection.hasFirstKey = true;
         }
     }
 

@@ -23,9 +23,6 @@ public class LightDetection : MonoBehaviour
     private void Start()
     {
         position = transform.position;
-        hasFirstKey = false;
-        hasLastKey = false;
-
         brightThreshold = 0.05f;
         stressLevel = 0;
     }
@@ -34,7 +31,7 @@ public class LightDetection : MonoBehaviour
     {
 
         LightLevel = getPlayerLight();
-        if (LightLevel > brightThreshold||hasLastKey)
+        if (LightLevel > brightThreshold || hasLastKey)
         {
             lastBrightTime = Time.time;
             if (hasFirstKey)
@@ -50,7 +47,7 @@ public class LightDetection : MonoBehaviour
         if ((monster.transform.position - this.transform.position).magnitude < killDistance)
             this.GetComponent<KillPlayer>().kill();
     }
-    
+
     private float getPlayerLight()
     {
         position = transform.position;
@@ -59,14 +56,14 @@ public class LightDetection : MonoBehaviour
         float totalIntensity = 0.0f;
         foreach (var light in lights)
             totalIntensity += IsPlayerHitByLight(light);
-        return Math.Min(totalIntensity, max)/max;
+        return Math.Min(totalIntensity, max) / max;
     }
     private float IsPlayerHitByLight(Light light)
     {
         Vector3 lightPosition = light.transform.position;
         Vector3 lightDirection = light.transform.forward;
         Vector3 lightToPlayerDirection = (position - lightPosition).normalized;
-        if(light.type == LightType.Spot)
+        if (light.type == LightType.Spot)
         {
             float dotProduct = Vector3.Dot(lightDirection, lightToPlayerDirection);
             float cosHalfSpotAngle = Mathf.Cos(light.spotAngle / 2f * Mathf.Deg2Rad);
@@ -76,7 +73,7 @@ public class LightDetection : MonoBehaviour
         RaycastHit hit;
         Vector3 rayDirection = (lightPosition - position).normalized;
         float maxDistance = Vector3.Distance(position, lightPosition);
-        if (Physics.Raycast(position, rayDirection, out hit, maxDistance)&& hit.transform.gameObject != light.gameObject)
+        if (Physics.Raycast(position, rayDirection, out hit, maxDistance) && hit.transform.gameObject != light.gameObject)
             return 0.0f;
         float distance = Vector3.Distance(position, lightPosition);
         float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
