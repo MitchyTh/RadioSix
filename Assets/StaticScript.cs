@@ -4,7 +4,8 @@ using UnityEngine;
 public class StaticScript : MonoBehaviour
 {
     public Material material;
-    public List<MeshCollider> meshColliders;
+    public List<GameObject> grueAreas;
+    private List<MeshFilter> meshFilters = new List<MeshFilter>();
     public GameObject player;
     public GameObject monster;
     public float damageLevel;
@@ -15,12 +16,14 @@ public class StaticScript : MonoBehaviour
         material.SetFloat("_Alpha", 0);
         damageLevel = 0;
         stressLevel = 0;
+        foreach (GameObject area in grueAreas)
+            meshFilters.Add(area.GetComponent<MeshFilter>().GetComponent<MeshFilter>());
     }
     //call every light calculation
     public void setStatic(float lightLevel, float threshold)
     {
         stressLevel = Mathf.Max(1 - Mathf.Clamp(((monster.transform.position - player.transform.position).magnitude - 10) / 60.0f, 0, 1), damageLevel);
-        print(stressLevel);
+        print("Light: " + lightLevel + " tress: "+stressLevel + " Damage: "+damageLevel + " Dist: "+(1 - Mathf.Clamp(((monster.transform.position - player.transform.position).magnitude - 10) / 60.0f, 0, 1)));
         if ((monster.transform.position - player.transform.position).magnitude < killDistance)
             player.GetComponent<KillPlayer>().kill(); 
         if (player.GetComponent<GrueBehavior>().hasGrue && damageLevel <= 0.1f)
@@ -31,23 +34,23 @@ public class StaticScript : MonoBehaviour
             player.GetComponent<GrueBehavior>().DoGrue();
         }
         if (lightLevel > threshold)
-            damageLevel -= 0.05f;
+            damageLevel = Mathf.Max(0, damageLevel - 0.05f);
         else
         {
             bool col = false;
-            foreach (MeshCollider mesh in meshColliders)
-                if (mesh.bounds.Contains(player.transform.position))
-                { 
+            foreach (MeshFilter mesh in meshFilters)
+                if (Physics.CheckSphere(player.transform.position, 0.5f, 1 << mesh.gameObject.layer))
+                {
                     col = true;
                     break;
                 }
             if (col)
             {
-                damageLevel += 0.003f;
+                damageLevel = Mathf.Min(1.0f, damageLevel + 0.001f);
                 player.GetComponent<GrueBehavior>().hasGrue = true;
             }
             else
-                damageLevel -= 0.05f;
+                damageLevel = Mathf.Max(0, damageLevel - 0.03f);
         }
         material.SetFloat("_Alpha", damageLevel);
         if (damageLevel >= 1.0f)

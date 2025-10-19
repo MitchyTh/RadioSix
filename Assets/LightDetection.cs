@@ -24,6 +24,8 @@ public class LightDetection : MonoBehaviour
         position = transform.position;
         hasPassedMonsterStart = false;
         staticScript = staticEffectImage.GetComponent<StaticScript>();
+        brightThreshold = 0.5f;
+        darkThreshold = 0.1f;
     }
 
     private void Update()
