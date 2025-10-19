@@ -3158,7 +3158,17 @@ MonoBehaviour:
   flashlight: {fileID: 1505844368}
   hasFirstKey: 0
   hasLastKey: 0
-  lights: []
+  lights:
+  - {fileID: 1379462191}
+  - {fileID: 1375221156}
+  - {fileID: 1531684582}
+  - {fileID: 1966501143}
+  - {fileID: 516218387}
+  - {fileID: 1466774449}
+  - {fileID: 727234963}
+  - {fileID: 367210256}
+  - {fileID: 908275139}
+  - {fileID: 1672210967}
   monster: {fileID: 157576711}
   killDistance: 1.7
   stressLevel: 0
@@ -4440,7 +4450,7 @@ GameObject:
   - component: {fileID: 1375221156}
   - component: {fileID: 1375221155}
   m_Layer: 0
-  m_Name: Spot Light (1)
+  m_Name: EndLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4543,11 +4553,11 @@ Transform:
   m_GameObject: {fileID: 1375221154}
   serializedVersion: 2
   m_LocalRotation: {x: 0.34623456, y: 0.16954075, z: 0.30104223, w: 0.8722105}
-  m_LocalPosition: {x: 11.06, y: 15.48, z: -120.77}
+  m_LocalPosition: {x: 6.3700004, y: 10.429999, z: -95.47976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1766973655}
   m_LocalEulerAnglesHint: {x: 30.126, y: 35.659, z: 47.978}
 --- !u!1 &1378081748
 GameObject:
@@ -4669,7 +4679,7 @@ GameObject:
   - component: {fileID: 1379462191}
   - component: {fileID: 1379462190}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: Godray
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5569,7 +5579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4929401859558038486, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8743634275284786995, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_Radius
@@ -6011,6 +6021,7 @@ Transform:
   - {fileID: 1932474371}
   - {fileID: 393499148}
   - {fileID: 1379462192}
+  - {fileID: 1375221157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1785838861 stripped
@@ -9264,4 +9275,3 @@ SceneRoots:
   - {fileID: 1308783750}
   - {fileID: 558558241}
   - {fileID: 250549730}
-  - {fileID: 1375221157}

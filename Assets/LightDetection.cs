@@ -26,7 +26,7 @@ public class LightDetection : MonoBehaviour
         hasFirstKey = false;
         hasLastKey = false;
 
-        brightThreshold = 0.5f;
+        brightThreshold = 0.05f;
         stressLevel = 0;
     }
 
@@ -38,19 +38,15 @@ public class LightDetection : MonoBehaviour
         {
             lastBrightTime = Time.time;
             if (hasFirstKey)
-            {
                 monster.GetComponent<AgentFollowPlayer>().StartChase();
-            }
         }
         else if (LightLevel < brightThreshold && Time.time - lastBrightTime > chaseTimeout)
         {
             if (!hasLastKey)
-            {
                 monster.GetComponent<AgentFollowPlayer>().StopChase();
-            }
         }
         stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
-        print("Light: " + LightLevel + " Stress: " + stressLevel);
+        //print("Light: " + LightLevel + " Stress: " + stressLevel);
         if ((monster.transform.position - this.transform.position).magnitude < killDistance)
             this.GetComponent<KillPlayer>().kill();
     }
@@ -84,6 +80,7 @@ public class LightDetection : MonoBehaviour
             return 0.0f;
         float distance = Vector3.Distance(position, lightPosition);
         float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
+        //float exposureIntensity = 30 / Mathf.Pow(distance, 2);
         return exposureIntensity;
     }
 }
