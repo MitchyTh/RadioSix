@@ -12,16 +12,14 @@ public class AgentFollowPlayer : MonoBehaviour
     public float wanderRadius = 10f;
     public float wanderInterval = 5f;
     private float wanderTimer;
-
     public bool wander;
 
-    private float OGspeed;
 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        OGspeed = agent.speed;
         wander = true;
+        wanderTimer = 0;
     }
 
     void Update()
@@ -46,15 +44,23 @@ public class AgentFollowPlayer : MonoBehaviour
 
     public void StartChase()
     {
-        agent.speed = OGspeed;
-        agent.ResetPath();
-        wander = false;
+        if (wander)
+        {
+            print("Started Chase");
+            agent.speed = 3.5f;
+            agent.ResetPath();
+            wander = false;
+        }
     }
     public void StopChase() 
     {
-        agent.speed = agent.speed / 3;
-        agent.ResetPath();
-        wander = true;
+        if (!wander)
+        {
+            print("Ended Chase");
+            agent.speed = 2f;
+            agent.ResetPath();
+            wander = true;
+        }
     }
 
     Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
@@ -71,22 +77,8 @@ public class AgentFollowPlayer : MonoBehaviour
 
     void chasePlayer()
     {
-        if (agent != null && player != null)
-        {
-
             NavMeshHit hit;
             if (NavMesh.SamplePosition(player.position, out hit, 2f, NavMesh.AllAreas))
-            {
                 agent.SetDestination(player.position);
-            }
-            else
-            {
-                Debug.Log("Player not being tracked on navmesh");
-            }
-        }
-        else
-        {
-            Debug.Log("player or agen not founnd");
-        }
     }
 }

@@ -138,8 +138,6 @@ public class PlayerController : MonoBehaviour //Network Behavior for multi
 
     public void Move(InputAction.CallbackContext context) //detects input for movement
     {
-       // if (!checkOwner.checkForOwner()) return;
-        print("moving");
         _moveInput = context.ReadValue<Vector2>();
     }
 
