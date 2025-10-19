@@ -29,7 +29,7 @@ public class LightDetection : MonoBehaviour
         brightThreshold = 0.5f;
         stressLevel = 0;
     }
-
+  
     private void Update()
     {
 
@@ -52,7 +52,9 @@ public class LightDetection : MonoBehaviour
         stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
         print("Light: " + LightLevel + " Stress: " + stressLevel);
         if ((monster.transform.position - this.transform.position).magnitude < killDistance)
+        {
             this.GetComponent<KillPlayer>().kill();
+        }
     }
     
     private float getPlayerLight()
