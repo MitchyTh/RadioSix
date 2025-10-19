@@ -52,7 +52,7 @@ public class StaticScript : MonoBehaviour
             else
                 damageLevel = Mathf.Max(0, damageLevel - 0.03f);
         }
-        material.SetFloat("_Alpha", damageLevel);
+        material.SetFloat("_Alpha", damageLevel/2.0f);
         if (damageLevel >= 1.0f)
         {
             player.GetComponent<KillPlayer>().kill();
