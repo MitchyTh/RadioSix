@@ -11,16 +11,19 @@ public class KeyBools : MonoBehaviour
     public void acquireKey1()
     {
         key1 = true;
+        checkCanLeave();
     }
 
     public void acquireKey2()
     {
         key2 = true;
+        checkCanLeave();
     }
 
     public void acquireKey3()
     {
         key3 = true;
+        checkCanLeave();
     }
 
     public void checkCanLeave()

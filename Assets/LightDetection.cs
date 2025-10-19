@@ -7,43 +7,52 @@ using UnityEngine;
 public class LightDetection : MonoBehaviour
 {
     [Range(0f, 1f)] public float LightLevel = 0f;
-    public GameObject staticEffectImage;
     private Vector3 position;
     private float lastBrightTime;
     private float brightThreshold = 0.5f;
-    private float darkThreshold = 0.1f;
     private float chaseTimeout = 5.0f;
     private float max = 15.0f;
-    private StaticScript staticScript;
     public GameObject flashlight;
-    public bool hasPassedMonsterStart = false;
+    public bool hasFirstKey = false;
+    public bool hasLastKey = false;
     public Light[] lights;
+    public GameObject monster;
+    public float killDistance = 1.7f;
+    public float stressLevel;
 
     private void Start()
     {
         position = transform.position;
-        hasPassedMonsterStart = false;
-        staticScript = staticEffectImage.GetComponent<StaticScript>();
+        hasFirstKey = false;
+        hasLastKey = false;
+
         brightThreshold = 0.5f;
-        darkThreshold = 0.1f;
+        stressLevel = 0;
     }
 
     private void Update()
     {
+
         LightLevel = getPlayerLight();
-        if (LightLevel > brightThreshold)
+        if (LightLevel > brightThreshold||hasLastKey)
         {
             lastBrightTime = Time.time;
-            if (hasPassedMonsterStart)
+            if (hasFirstKey)
             {
-                //CALL START CHASE
+                monster.GetComponent<AgentFollowPlayer>().StartChase();
             }
         }
-        else if (LightLevel < darkThreshold && Time.time - lastBrightTime > chaseTimeout)
+        else if (LightLevel < brightThreshold && Time.time - lastBrightTime > chaseTimeout)
         {
-            //CALL STOP CHASE
+            if (!hasLastKey)
+            {
+                monster.GetComponent<AgentFollowPlayer>().StopChase();
+            }
         }
-        staticScript.setStatic(LightLevel, darkThreshold);
+        stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
+        print("Light: " + LightLevel + " Stress: " + stressLevel);
+        if ((monster.transform.position - this.transform.position).magnitude < killDistance)
+            this.GetComponent<KillPlayer>().kill();
     }
     
     private float getPlayerLight()
@@ -71,53 +80,10 @@ public class LightDetection : MonoBehaviour
         RaycastHit hit;
         Vector3 rayDirection = (lightPosition - position).normalized;
         float maxDistance = Vector3.Distance(position, lightPosition);
-        if (Physics.Raycast(position, rayDirection, out hit, maxDistance))
-        {
-            //Debug.DrawRay(position,lightPosition,Color.yellow);
-            // If the ray hits something, check if it's the light source itself.
-            // If it's something else, the player is blocked.
-            if (hit.transform.gameObject != light.gameObject)
-                return 0.0f;
-        }
+        if (Physics.Raycast(position, rayDirection, out hit, maxDistance)&& hit.transform.gameObject != light.gameObject)
+            return 0.0f;
         float distance = Vector3.Distance(position, lightPosition);
         float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
         return exposureIntensity;
     }
-
-
-    //float GetLightIntensity(Light light)
-    //{
-    //    RaycastHit hit;
-    //    Vector3 lightPosition = light.transform.position;
-    //    Vector3 lightDirection = light.transform.forward;
-    //    Vector3 toOther = Vector3.Normalize(transform.position - light.transform.position);
-
-    //    float exposureIntensity;
-    //    if(Vector3.Dot(lightDirection, toOther) < 0)
-    //    {
-    //        Debug.Log($"{light.gameObject.name}: Behind light");
-    //    } else
-    //    {
-    //        Debug.Log($"{light.gameObject.name}: In Light");
-    //    }
-
-
-
-
-    //    Physics.Raycast(transform.position, lightPosition, out hit, Mathf.Infinity);
-    //    Debug.DrawRay(transform.position, lightPosition * hit.distance, Color.yellow);
-
-        
-    //    Debug.Log($"Light Direction for {light.gameObject.name}: {lightDirection}");
-
-    //    Debug.DrawRay(light.transform.position, lightDirection * 10f, Color.red, 15f);
-
-    //    // Currently grabs the distance, not accounting for the player being in front of the light.  
-    //    exposureIntensity = Mathf.Clamp(light.intensity / Mathf.Pow(hit.distance, 2), 0,1);
-        
-    //    //Debug.Log($"Light Intensity {exposureIntensity}");
-        
-    //    return exposureIntensity;
-    //    //return (Physics.Raycast(transform.position, lightPosition, out hit, Mathf.Infinity));
-    //}
 }
