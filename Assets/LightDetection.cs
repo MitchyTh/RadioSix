@@ -37,14 +37,11 @@ public class LightDetection : MonoBehaviour
                 //CALL START CHASE
             }
         }
-        else if (LightLevel < darkThreshold)
+        else if (LightLevel < darkThreshold && Time.time - lastBrightTime > chaseTimeout)
         {
-            staticScript.setStatic(LightLevel, darkThreshold);
-            if (Time.time - lastBrightTime > chaseTimeout)
-            {
-                //CALL STOP CHASE
-            }
+            //CALL STOP CHASE
         }
+        staticScript.setStatic(LightLevel, darkThreshold);
     }
     
     private float getPlayerLight()

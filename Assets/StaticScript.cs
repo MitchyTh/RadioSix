@@ -8,17 +8,21 @@ public class StaticScript : MonoBehaviour
     public GameObject player;
     public GameObject monster;
     public float damageLevel;
-    public float killDistance = 1.0f;
+    public float killDistance = 1.7f;
+    public float stressLevel;
     void Start()
     {
         material.SetFloat("_Alpha", 0);
         damageLevel = 0;
+        stressLevel = 0;
     }
     //call every light calculation
     public void setStatic(float lightLevel, float threshold)
     {
+        stressLevel = Mathf.Max(1 - Mathf.Clamp(((monster.transform.position - player.transform.position).magnitude - 10) / 60.0f, 0, 1), damageLevel);
+        print(stressLevel);
         if ((monster.transform.position - player.transform.position).magnitude < killDistance)
-            player.GetComponent<KillPlayer>().kill();
+            player.GetComponent<KillPlayer>().kill(); 
         if (player.GetComponent<GrueBehavior>().hasGrue && damageLevel <= 0.1f)
             player.GetComponent<GrueBehavior>().hasGrue = false;
         if (player.GetComponent<GrueBehavior>().hasGrue && lightLevel >= 1.0f)
