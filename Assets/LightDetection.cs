@@ -7,25 +7,49 @@ using UnityEngine;
 public class LightDetection : MonoBehaviour
 {
     [Range(0f, 1f)] public float LightLevel = 0f;
-
+    public GameObject staticEffectImage;
     private Vector3 position;
+    private float lastBrightTime;
+    private float brightThreshold = 0.5f;
+    private float darkThreshold = 0.1f;
+    private float chaseTimeout = 5.0f;
+    private float max = 15.0f;
+    private StaticScript staticScript;
     public GameObject flashlight;
+    public bool hasPassedMonsterStart = false;
     public Light[] lights;
 
     private void Start()
     {
         position = transform.position;
+        hasPassedMonsterStart = false;
+        staticScript = staticEffectImage.GetComponent<StaticScript>();
     }
 
     private void Update()
     {
-        print(getPlayerLight());
+        LightLevel = getPlayerLight();
+        if (LightLevel > brightThreshold)
+        {
+            lastBrightTime = Time.time;
+            if (hasPassedMonsterStart)
+            {
+                //CALL START CHASE
+            }
+        }
+        else if (LightLevel < darkThreshold)
+        {
+            staticScript.setStatic(LightLevel, darkThreshold);
+            if (Time.time - lastBrightTime > chaseTimeout)
+            {
+                //CALL STOP CHASE
+            }
+        }
     }
     
     private float getPlayerLight()
     {
         position = transform.position;
-        float max = 15.0f;
         if (flashlight.GetComponent<Light>().enabled)
             return 1.0f;
         float totalIntensity = 0.0f;
