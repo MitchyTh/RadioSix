@@ -9,7 +9,12 @@ public class DoorOpen : MonoBehaviour
     private bool hasOpened = false;
     private bool isRotating = false;
     private bool inRange = false;
+    public bool canOpen = false;
 
+    private void Update()
+    {
+        canOpen = keybools.canLeave;
+    }
     public void RotateOnPivot()
     {
         if (!isRotating && inRange && !hasOpened && keybools.canLeave)

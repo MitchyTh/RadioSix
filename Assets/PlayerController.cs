@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour //Network Behavior for multi
     public Camera MainCamera;
     public CinemachineBrain brain;
     public CinemachineCamera cinemachineCamera;
+
+    public GameObject isPaused;
         
     private CharacterController _controller;
     private CapsuleCollider _collider;
@@ -30,9 +32,9 @@ public class PlayerController : MonoBehaviour //Network Behavior for multi
 
     [HideInInspector] public bool _grounded = false;
     public bool coyoteJump = false; //allows buffered jump
+    private bool _isPaused = false;
 
     private Vector3 _externalMomentum = Vector3.zero;
-
 
     public void SetExternalMomentum(Vector3 momentum) // this is called from slide script
     {
@@ -46,10 +48,8 @@ public class PlayerController : MonoBehaviour //Network Behavior for multi
         castHeight = (_collider.height / 2 * transform.localScale.y) - _collider.height * 0.25f;
         radius = _collider.radius;
 
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
     }
+
 
     private bool isGrounded() //This is raycast based grounded function. It creates four raycasts below the player to detect the ground
     {
@@ -84,8 +84,20 @@ public class PlayerController : MonoBehaviour //Network Behavior for multi
 
     private void Update() //this function runs once every frame
     {
-       //if(!checkOwner.checkForOwner()) return;
-        
+        //if(!checkOwner.checkForOwner()) return;
+
+         _isPaused= isPaused.GetComponent<PauseScreenManager>().isPaused;
+        if (_isPaused)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
 
         //print(_externalMomentum);
         _grounded = isGrounded(); //checks if the player is grounded

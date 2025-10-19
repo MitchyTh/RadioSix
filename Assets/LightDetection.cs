@@ -19,7 +19,7 @@ public class LightDetection : MonoBehaviour
     public bool hasLastKey = false;
     public Light[] lights;
     public GameObject monster;
-    public float killDistance = 1.7f;
+    public float killDistance = 2f;
     public float stressLevel;
 
     private void Start()

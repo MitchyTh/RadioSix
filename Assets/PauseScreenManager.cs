@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 public class PauseScreenManager : MonoBehaviour
 {
     public GameObject pausePanel;
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     void Start()
     {
         pausePanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     void Update()
@@ -44,6 +45,7 @@ public class PauseScreenManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        print("restart!");
     }
 
     public void LoadMainMenu()
