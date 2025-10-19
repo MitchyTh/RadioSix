@@ -1,8 +1,12 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
 public class Flashlight : MonoBehaviour
 {
+    public KeyBools keybools;
+    private bool pickedUp = false;
+    private bool playerInRange;
     public bool hasFlashlight = false;
     public GameObject model;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,9 +26,13 @@ public class Flashlight : MonoBehaviour
     }
     public void pickup()
     {
-        Light mySpotlight = GetComponent<Light>();
-        hasFlashlight = true;
-        model.SetActive(false);
-        mySpotlight.enabled = true;
+        if (!hasFlashlight && keybools.flashlightInRange == true)
+        {
+            Light mySpotlight = GetComponent<Light>();
+            hasFlashlight = true;
+            model.SetActive(false);
+            mySpotlight.enabled = true;
+            pickedUp = true;
+        }
     }
 }

@@ -7,6 +7,8 @@ TagManager:
   - Key1
   - Key2
   - Key3
+  - Flashlight
+  - Key4
   layers:
   - Default
   - TransparentFX

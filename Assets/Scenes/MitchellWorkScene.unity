@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrabFace
       objectReference: {fileID: 0}
+    - target: {fileID: 2856835258004257178, guid: 874ae569672197f4296ddb0aa905a440, type: 3}
+      propertyPath: triggerDistance
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3292830657794510639, guid: 874ae569672197f4296ddb0aa905a440, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.23015
@@ -1164,6 +1168,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrabFace (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2856835258004257178, guid: 874ae569672197f4296ddb0aa905a440, type: 3}
+      propertyPath: cooldownTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2856835258004257178, guid: 874ae569672197f4296ddb0aa905a440, type: 3}
+      propertyPath: triggerDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3292830657794510639, guid: 874ae569672197f4296ddb0aa905a440, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.62584
@@ -1952,6 +1964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12308fed3ea200a4ea13b09a9919990d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashlightInRange: 0
 --- !u!1 &1406497608
 GameObject:
   m_ObjectHideFlags: 0
@@ -2622,19 +2635,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 963736044300325979, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9190271
+      value: 0.8080447
       objectReference: {fileID: 0}
     - target: {fileID: 963736044300325979, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.08040445
+      value: -0.44512868
       objectReference: {fileID: 0}
     - target: {fileID: 963736044300325979, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.3844386
+      value: 0.3380135
       objectReference: {fileID: 0}
     - target: {fileID: 963736044300325979, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.033634022
+      value: 0.18620196
       objectReference: {fileID: 0}
     - target: {fileID: 1781597731838316137, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_TagString
