@@ -15,8 +15,11 @@ public class AgentFollowPlayer : MonoBehaviour
 
     void Update()
     {
-        if (agent != null && agent.isOnNavMesh && player != null)
+        if (agent != null && player != null)
         {
+            agent.SetDestination(player.position);
+
+            Debug.Log("AAAAAA");
             NavMeshHit hit;
             if (NavMesh.SamplePosition(player.position, out hit, 2f, NavMesh.AllAreas))
             {
