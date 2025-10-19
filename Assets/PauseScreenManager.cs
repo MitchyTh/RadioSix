@@ -27,6 +27,15 @@ public class PauseScreenManager : MonoBehaviour
         }
     }
 
+    public void SetPauseGame()
+    {
+        isPaused = true;
+    }
+    public void SetUnPauseGame()
+    {
+        isPaused = false;
+    }
+
     public void PauseGame()
     {
         pausePanel.SetActive(true);

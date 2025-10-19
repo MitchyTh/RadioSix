@@ -1142,6 +1142,10 @@ PrefabInstance:
       propertyPath: deathPanel
       value: 
       objectReference: {fileID: 464813578}
+    - target: {fileID: 3250264522298792374, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
+      propertyPath: pauseManager
+      value: 
+      objectReference: {fileID: 658026277}
     - target: {fileID: 7359623443354808910, guid: 6455892e4cedd824cb710f51f608f848, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
@@ -10004,7 +10008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51b1b907163799f4bba335480b7b0925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winscreen: {fileID: 0}
+  winscreen: {fileID: 2132217761}
+  pauseManager: {fileID: 658026277}
 --- !u!65 &1934824197
 BoxCollider:
   m_ObjectHideFlags: 0
