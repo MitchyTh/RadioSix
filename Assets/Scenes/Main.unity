@@ -2792,7 +2792,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LightLevel: 0
   flashlight: {fileID: 1505844368}
-  hasPassedMonsterStart: 0
+  hasFirstKey: 0
+  hasLastKey: 0
   lights: []
   monster: {fileID: 157576711}
   killDistance: 1.7
@@ -4472,7 +4473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1777417283433536432, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.16
+      value: 23.69
       objectReference: {fileID: 0}
     - target: {fileID: 1777417283433536432, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4480,7 +4481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1777417283433536432, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.12
+      value: -52.46
       objectReference: {fileID: 0}
     - target: {fileID: 1777417283433536432, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4513,6 +4514,14 @@ PrefabInstance:
     - target: {fileID: 2303201033221993348, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 877976173}
+    - target: {fileID: 2303201033221993348, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
+      propertyPath: wanderRadius
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303201033221993348, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
+      propertyPath: wanderInterval
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4929401859558038486, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: m_Name
@@ -4537,7 +4546,7 @@ PrefabInstance:
     - target: {fileID: 8920094303085281752, guid: 8e28c19afb87d0044a9f066a410384e4, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 877976173}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

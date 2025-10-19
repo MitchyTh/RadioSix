@@ -13,7 +13,8 @@ public class LightDetection : MonoBehaviour
     private float chaseTimeout = 5.0f;
     private float max = 15.0f;
     public GameObject flashlight;
-    public bool hasPassedMonsterStart = false;
+    public bool hasFirstKey = false;
+    public bool hasLastKey = false;
     public Light[] lights;
     public GameObject monster;
     public float killDistance = 1.7f;
@@ -22,25 +23,31 @@ public class LightDetection : MonoBehaviour
     private void Start()
     {
         position = transform.position;
-        hasPassedMonsterStart = false;
+        hasFirstKey = false;
+        hasLastKey = false;
+
         brightThreshold = 0.5f;
         stressLevel = 0;
     }
 
     private void Update()
     {
+
         LightLevel = getPlayerLight();
-        if (LightLevel > brightThreshold)
+        if (LightLevel > brightThreshold||hasLastKey)
         {
             lastBrightTime = Time.time;
-            if (hasPassedMonsterStart)
+            if (hasFirstKey)
             {
-                //CALL START CHASE
+                monster.GetComponent<AgentFollowPlayer>().StartChase();
             }
         }
         else if (LightLevel < brightThreshold && Time.time - lastBrightTime > chaseTimeout)
         {
-            //CALL STOP CHASE
+            if (!hasLastKey)
+            {
+                monster.GetComponent<AgentFollowPlayer>().StopChase();
+            }
         }
         stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
         print("Light: " + LightLevel + " Stress: " + stressLevel);
