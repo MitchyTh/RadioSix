@@ -29,11 +29,11 @@ public class LightDetection : MonoBehaviour
         hasLastKey = false;
         brightThreshold = 0.05f;
         stressLevel = 0;
-        lastBrightTime = Time.time;
         lastDarkTime = Time.time;
+        monster.GetComponent<AgentFollowPlayer>().StopChase();
 
     }
-
+  
     private void Update()
     {
         LightLevel = getPlayerLight();
@@ -52,7 +52,9 @@ public class LightDetection : MonoBehaviour
         stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
         //set heartbeat to stress
         if ((monster.transform.position - this.transform.position).magnitude < killDistance)
+        {
             this.GetComponent<KillPlayer>().kill();
+        }
     }
     
     private float getPlayerLight()
