@@ -22,7 +22,9 @@ public class Flashlight : MonoBehaviour
     }
     public void pickup()
     {
+        Light mySpotlight = GetComponent<Light>();
         hasFlashlight = true;
         model.SetActive(false);
+        mySpotlight.enabled = true;
     }
 }
