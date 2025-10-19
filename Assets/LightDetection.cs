@@ -9,8 +9,10 @@ public class LightDetection : MonoBehaviour
     [Range(0f, 1f)] public float LightLevel = 0f;
     private Vector3 position;
     private float lastBrightTime;
+    private float lastDarkTime;
     private float brightThreshold = 0.5f;
     private float chaseTimeout = 5.0f;
+    private float chaseTimein = 3.0f;
     private float max = 15.0f;
     public GameObject flashlight;
     public bool hasFirstKey = false;
@@ -25,16 +27,17 @@ public class LightDetection : MonoBehaviour
         position = transform.position;
         hasFirstKey = false;
         hasLastKey = false;
-
         brightThreshold = 0.05f;
         stressLevel = 0;
+        lastBrightTime = Time.time;
+        lastDarkTime = Time.time;
+
     }
 
     private void Update()
     {
-
         LightLevel = getPlayerLight();
-        if (LightLevel > brightThreshold||hasLastKey)
+        if ((LightLevel > brightThreshold && Time.time - lastDarkTime > chaseTimein) || hasLastKey)
         {
             lastBrightTime = Time.time;
             if (hasFirstKey)
@@ -42,11 +45,12 @@ public class LightDetection : MonoBehaviour
         }
         else if (LightLevel < brightThreshold && Time.time - lastBrightTime > chaseTimeout)
         {
+            lastDarkTime = Time.time;
             if (!hasLastKey)
                 monster.GetComponent<AgentFollowPlayer>().StopChase();
         }
         stressLevel = 1 - Mathf.Clamp(((monster.transform.position - this.transform.position).magnitude - 10) / 60.0f, 0, 1);
-        //print("Light: " + LightLevel + " Stress: " + stressLevel);
+        //set heartbeat to stress
         if ((monster.transform.position - this.transform.position).magnitude < killDistance)
             this.GetComponent<KillPlayer>().kill();
     }
@@ -80,7 +84,6 @@ public class LightDetection : MonoBehaviour
             return 0.0f;
         float distance = Vector3.Distance(position, lightPosition);
         float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
-        //float exposureIntensity = 30 / Mathf.Pow(distance, 2);
         return exposureIntensity;
     }
 }
