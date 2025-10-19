@@ -24,13 +24,14 @@ public class LightDetection : MonoBehaviour
     
     private float getPlayerLight()
     {
-        float max = 100.0f;
+        position = transform.position;
+        float max = 15.0f;
         if (flashlight.GetComponent<Light>().enabled)
             return 1.0f;
         float totalIntensity = 0.0f;
         foreach (var light in lights)
             totalIntensity += IsPlayerHitByLight(light);
-        return Math.Max(totalIntensity, max)/30.0f;
+        return Math.Min(totalIntensity, max)/max;
     }
     private float IsPlayerHitByLight(Light light)
     {
@@ -49,16 +50,14 @@ public class LightDetection : MonoBehaviour
         float maxDistance = Vector3.Distance(position, lightPosition);
         if (Physics.Raycast(position, rayDirection, out hit, maxDistance))
         {
+            //Debug.DrawRay(position,lightPosition,Color.yellow);
             // If the ray hits something, check if it's the light source itself.
             // If it's something else, the player is blocked.
             if (hit.transform.gameObject != light.gameObject)
-            {
                 return 0.0f;
-            }
         }
         float distance = Vector3.Distance(position, lightPosition);
-        float exposureIntensity = Mathf.Clamp(light.intensity / Mathf.Pow(distance, 2), 0, 1);
-        Debug.Log($"Current Exposure: {exposureIntensity}");
+        float exposureIntensity = light.intensity / Mathf.Pow(distance, 2);
         return exposureIntensity;
     }
 
