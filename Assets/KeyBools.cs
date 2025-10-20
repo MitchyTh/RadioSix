@@ -8,6 +8,7 @@ public class KeyBools : MonoBehaviour
 {
     bool key1 = false, key2 = false, key3 = false, key4 = false;
     public bool canLeave = false;
+    private bool flag = false;
 
     public bool flashlightInRange;
     public LightDetection lightDetection;
@@ -61,11 +62,13 @@ public class KeyBools : MonoBehaviour
     public void checkFirstKey()
     {
         Debug.Log("Check first key");
-        if (lightDetection.hasFirstKey == false)
+        if (lightDetection.hasFirstKey == false && flag ==true)
         {
             print("set true");
             lightDetection.hasFirstKey = true;
         }
+
+        flag = true;
     }
 
         public void tryToPickupKey(InputAction.CallbackContext context)
