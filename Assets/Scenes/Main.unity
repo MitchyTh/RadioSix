@@ -9535,6 +9535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioQueueArea
       objectReference: {fileID: 0}
+    - target: {fileID: 2355097881512965816, guid: 782d335a960ef784c84df4fed1d054d9, type: 3}
+      propertyPath: oneNDone
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4811951544047095039, guid: 782d335a960ef784c84df4fed1d054d9, type: 3}
       propertyPath: m_Size.z
       value: 4.9801025
