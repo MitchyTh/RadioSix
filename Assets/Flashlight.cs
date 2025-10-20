@@ -1,4 +1,6 @@
+using System.Collections;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 
@@ -9,6 +11,8 @@ public class Flashlight : MonoBehaviour
     private bool playerInRange;
     public bool hasFlashlight = false;
     public GameObject model;
+
+    public TextMeshPro text;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,7 +24,10 @@ public class Flashlight : MonoBehaviour
             return;
         Light mySpotlight = GetComponent<Light>();
         if (mySpotlight.enabled)
+        {
             mySpotlight.enabled = false;
+            text.enabled = false;   
+        }
         else
             mySpotlight.enabled = true;
     }
@@ -33,6 +40,8 @@ public class Flashlight : MonoBehaviour
             model.SetActive(false);
             mySpotlight.enabled = true;
             pickedUp = true;
+            text.enabled = true;
         }
     }
+    
 }
